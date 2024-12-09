@@ -1,0 +1,38 @@
+@page
+@model EventManagementPlatform.Pages.EventsModel
+@{
+    ViewData["Title"] = "Manage Events";
+}
+
+<h2>Manage Events</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Description</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Attendees</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var eventItem in Model.Events)
+        {
+            <tr>
+                <td>@eventItem.Name</td>
+                <td>@eventItem.Description</td>
+                <td>@eventItem.StartTime.ToString("g")</td>
+                <td>@eventItem.EndTime.ToString("g")</td>
+                <td>
+                    <ul>
+                        @foreach (var attendee in eventItem.EventAttendees)
+                        {
+                            <li>@attendee.Attendee.Name (@attendee.Attendee.Email)</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
